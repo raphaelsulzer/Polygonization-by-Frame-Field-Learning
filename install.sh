@@ -64,9 +64,9 @@ conda activate ${ENV_NAME}
 conda install 'gdal<3.6' libgdal -y
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 pip install -r requirements.txt
-pip install -e .
-pip install -e lydorn_utils
-pip install -e pytorch_lydorn
+pip install .
+pip install lydorn_utils
+pip install pytorch_lydorn
 
 echo
 python -c "import torch; torch.cuda.is_available()"

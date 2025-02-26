@@ -27,6 +27,6 @@
   },
 
   "optim_params": {
-    "batch_size": 2  // Overwrite default batch size per GPU. The effective batch size is effective_batch_size=world_size*batch_size
+    "batch_size": 16  // Overwrite default batch size per GPU. The effective batch size is effective_batch_size=world_size*batch_size
   }
 }
