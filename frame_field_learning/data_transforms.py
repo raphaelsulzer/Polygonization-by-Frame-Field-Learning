@@ -100,16 +100,26 @@ class CudaDataAugmentation(object):
                     downscale_factor: torch.Tensor = torch.empty(batch_size, device=device).uniform_(*self.scaling)
                 affine_grid = torch_lydorn.kornia.geometry.transform.get_affine_grid(combined, angle, offset,
                                                                                      downscale_factor)
+                
+                # combined[:, bilinear_slice, ...] = \
+                #     torch.nn.functional.grid_sample(combined[:, bilinear_slice, ...],
+                #                                     affine_grid, mode='bilinear')
+                ## RS: change to align_corners = True, because of this torch warning:
+                ## /data/rsulzer/miniconda3/envs/ffl/lib/python3.10/site-packages/torch/nn/functional.py:5015: UserWarning: Default grid_sample and affine_grid behavior has changed to align_corners=False since 1.3.0. Please specify align_corners=True if the old behavior is desired. See the documentation of grid_sample for details.
+                
                 combined[:, bilinear_slice, ...] = \
                     torch.nn.functional.grid_sample(combined[:, bilinear_slice, ...],
-                                                    affine_grid, mode='bilinear')
-
+                                                    affine_grid, mode='bilinear',
+                                                    align_corners=False
+                                                    )
 
 
                 # Rotate sizes and anglefield with mode='nearest'
                 # because it makes no sense to interpolate size values and angle values:
                 combined[:, nearest_slice, ...] = torch.nn.functional.grid_sample(combined[:, nearest_slice, ...],
-                                                                                  affine_grid, mode='nearest')
+                                                                                  affine_grid, mode='nearest',
+                                                                                  align_corners=False
+                                                                                  )
 
                 # Additionally the angle field's values themselves have to be rotated:
                 combined[:, slices_nearest["gt_crossfield_angle"],

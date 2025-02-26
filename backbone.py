@@ -15,26 +15,26 @@ def get_backbone(backbone_params):
         backbone = UNetBackbone(backbone_params["input_features"], backbone_params["features"])
         backbone = _SimpleSegmentationModel(backbone, classifier=torch.nn.Identity())
     elif backbone_params["name"] == "fcn50":
-        backbone = torchvision.models.segmentation.fcn_resnet50(pretrained=backbone_params["pretrained"],
+        backbone = torchvision.models.segmentation.fcn_resnet50(weights=backbone_params["pretrained"],
                                                                 num_classes=21)
         backbone.classifier = torch.nn.Sequential(*list(backbone.classifier.children())[:-1],
                                                   torch.nn.Conv2d(512, backbone_params["features"], kernel_size=(1, 1),
                                                                   stride=(1, 1)))
     elif backbone_params["name"] == "fcn101":
-        backbone = torchvision.models.segmentation.fcn_resnet101(pretrained=backbone_params["pretrained"],
+        backbone = torchvision.models.segmentation.fcn_resnet101(weights=backbone_params["pretrained"],
                                                                  num_classes=21)
         backbone.classifier = torch.nn.Sequential(*list(backbone.classifier.children())[:-1],
                                                   torch.nn.Conv2d(512, backbone_params["features"], kernel_size=(1, 1),
                                                                   stride=(1, 1)))
 
     elif backbone_params["name"] == "deeplab50":
-        backbone = torchvision.models.segmentation.deeplabv3_resnet50(pretrained=backbone_params["pretrained"],
+        backbone = torchvision.models.segmentation.deeplabv3_resnet50(weights=backbone_params["pretrained"],
                                                                       num_classes=21)
         backbone.classifier = torch.nn.Sequential(*list(backbone.classifier.children())[:-1],
                                                   torch.nn.Conv2d(256, backbone_params["features"], kernel_size=(1, 1),
                                                                   stride=(1, 1)))
     elif backbone_params["name"] == "deeplab101":
-        backbone = torchvision.models.segmentation.deeplabv3_resnet101(pretrained=backbone_params["pretrained"],
+        backbone = torchvision.models.segmentation.deeplabv3_resnet101(weights=backbone_params["pretrained"],
                                                                        num_classes=21)
         backbone.classifier = torch.nn.Sequential(*list(backbone.classifier.children())[:-1],
                                                   torch.nn.Conv2d(256, backbone_params["features"], kernel_size=(1, 1),
