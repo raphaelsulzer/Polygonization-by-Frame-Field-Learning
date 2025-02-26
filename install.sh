@@ -12,6 +12,10 @@ echo
 CONDA_DIR=`realpath /opt/miniconda3`
 if (test -z $CONDA_DIR) || [ ! -d $CONDA_DIR ]
 then
+  CONDA_DIR=`realpath /data/rsulzer/miniconda3`
+fi
+if (test -z $CONDA_DIR) || [ ! -d $CONDA_DIR ]
+then
   CONDA_DIR=`realpath ~/anaconda3`
 fi
 
@@ -57,12 +61,14 @@ conda activate ${ENV_NAME}
 
 ########## PIP VERSION IS NOW WORKING #############
 ### PIP VERSION
+conda install 'gdal<3.6' libgdal -y
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 pip install -r requirements.txt
 pip install -e .
 pip install -e lydorn_utils
 pip install -e pytorch_lydorn
 
+echo
 python -c "import torch; torch.cuda.is_available()"
 RETVAL=$?  # Capture return code
 if [ $RETVAL -eq 0 ]; then

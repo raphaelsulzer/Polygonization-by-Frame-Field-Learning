@@ -4,14 +4,11 @@
   "run_name": "inria_dataset_polygonized.unet_resnet101_pretrained.leaderboard",
 
 
-
   "seg_params": {
     "compute_interior": true,
     "compute_edge": false,
     "compute_vertex": false
   },
-
-
 
 
 
@@ -30,6 +27,6 @@
   },
 
   "optim_params": {
-    "batch_size": 4  // Overwrite default batch size per GPU. The effective batch size is effective_batch_size=world_size*batch_size
+    "batch_size": 2  // Overwrite default batch size per GPU. The effective batch size is effective_batch_size=world_size*batch_size
   }
 }

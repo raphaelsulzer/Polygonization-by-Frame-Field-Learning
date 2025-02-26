@@ -44,6 +44,7 @@ def get_args():
              'If --out_dirpath is specified, prediction outputs will be saved there..'
              'If --out_dirpath is not specified, predictions will be saved next to inputs.'
              'Make sure to also specify the run_name of the model to use for prediction.')
+
     argparser.add_argument(
         '--out_dirpath',
         type=str,
@@ -52,7 +53,9 @@ def get_args():
     argparser.add_argument(
         '-c', '--config',
         type=str,
+        default="configs/config.inria_dataset_polygonized.unet_resnet101_pretrained.leaderboard.json",
         help='Name of the config file, excluding the .json file extension.')
+
     argparser.add_argument(
         '--dataset_params',
         type=str,
@@ -63,11 +66,13 @@ def get_args():
         default="runs",
         type=str,
         help='Directory where runs are recorded (model saves and logs).')
+
     argparser.add_argument(
         '--run_name',
         type=str,
         help='Name of the run to use.'
              'That name does not include the timestamp of the folder name: <run_name> | <yyyy-mm-dd hh:mm:ss>.')
+
     argparser.add_argument(
         '--new_run',
         action='store_true',
@@ -78,6 +83,7 @@ def get_args():
         help="This is the run_name to initialize the weights from."
              "If None, weights will be initialized randomly."
              "This is a single word, without the timestamp.")
+
     argparser.add_argument(
         '--samples',
         type=int,
@@ -87,10 +93,12 @@ def get_args():
         '-b', '--batch_size',
         type=int,
         help='Batch size. Default value can be set in config file. Is doubled when no back propagation is done (while in eval mode). If a specific effective batch size is desired, set the eval_batch_size argument.')
+
     argparser.add_argument(
         '--eval_batch_size',
         type=int,
         help='Batch size for evaluation. Overrides the effective batch size when evaluating.')
+
     argparser.add_argument(
         '-m', '--mode',
         default="train",
@@ -100,6 +108,7 @@ def get_args():
              'Train: train model on speciffied folds. '
              'Eval: eval model on specified fold. '
              'Eval_coco: measures COCO metrics of specified fold')
+
     argparser.add_argument(
         '--fold',
         nargs='*',
@@ -111,14 +120,17 @@ def get_args():
              'When optimizing the network for the last time before test, we would like to optimize it on train + val: in that case select both train and val folds.'
              'Then for evaluation (mode=eval), we might want to evaluate on the val folds for hyper-parameter selection.'
              'And finally evaluate (mode=eval) on the test fold for the final predictions (and possibly metric) for the paper/competition')
+
     argparser.add_argument(
         '--max_epoch',
         type=int,
         help='Stop training when max_epoch is reached. If not set, value in config is used.')
+
     argparser.add_argument(
         '--eval_patch_size',
         type=int,
         help='When evaluating, patch size the tile split into.')
+
     argparser.add_argument(
         '--eval_patch_overlap',
         type=int,

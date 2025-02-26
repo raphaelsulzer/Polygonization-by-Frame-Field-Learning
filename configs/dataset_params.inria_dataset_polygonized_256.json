@@ -1,5 +1,6 @@
 {
-  "root_dirname": "AerialImageDataset",
+//  "root_dirname": "AerialImageDataset",
+  "root_dirname": "/home/rsulzer/data/AerialImageDataset",
   "pre_process": true,
   "gt_source": "disk",
   "gt_type": "geojson",
