@@ -1,7 +1,6 @@
 .history/
 __pycache__/
 
-
 .idea
 
 build/*
@@ -17,7 +16,7 @@ exp/*
 backbones/*
 
 frame_field_learning/runs/*
-frame_field_learning/__pycache__/*
+frame_field_learning/__pycache__
 
 **/*.pyc
 **/*.so

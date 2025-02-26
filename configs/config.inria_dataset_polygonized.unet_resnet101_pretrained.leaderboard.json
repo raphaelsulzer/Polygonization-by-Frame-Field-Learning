@@ -10,8 +10,6 @@
     "compute_vertex": false
   },
 
-
-
   "backbone_params": {
     "defaults_filepath": "configs/backbone_params.unet_resnet101.json",  // Path from the project's root to a JSON with default values for backbone_params
     "pretrained": true
