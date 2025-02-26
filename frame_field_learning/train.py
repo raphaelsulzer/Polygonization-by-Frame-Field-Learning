@@ -3,11 +3,11 @@ import torch
 import torch.utils.data
 import torch.distributed
 
-from . import data_transforms
-from .model import FrameFieldModel
-from .trainer import Trainer
-from . import losses
-from . import local_utils
+from frame_field_learning import data_transforms
+from frame_field_learning.model import FrameFieldModel
+from frame_field_learning.trainer import Trainer
+from frame_field_learning import losses
+from frame_field_learning import local_utils
 
 from lydorn_utils import print_utils
 
